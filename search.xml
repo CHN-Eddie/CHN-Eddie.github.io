@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>Hello World</title>
+    <url>/2026/10/19/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start">Quick Start</h2>
+<h3 id="Create-a-new-post">Create a new post</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server">Run server</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files">Generate static files</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites">Deploy to remote sites</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>建站</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Linux 学习笔记(持续更新中)</title>
+    <url>/2026/10/20/linux_node/</url>
+    <content><![CDATA[<blockquote>
+<p>本文笔记主要源自于观看<a href="https://www.bilibili.com">B站</a> <a href="https://space.bilibili.com/651245581?spm_id_from=333.337.0.0"><strong>韩顺平</strong></a>老师的：<a href="https://www.bilibili.com/video/BV1Sv411r7vd/?share_source=copy_web&amp;vd_source=f6bb0892e129ff0662ea07dd1f85f2eb">一周学会Linux</a>课程 以及自我的学习总结</p>
+</blockquote>
+<hr>
+<h1>基础篇</h1>
+<h2 id="Linux-介绍">Linux 介绍</h2>
+<p><strong>Linux</strong>是一个开源、免费的<strong>操作系统</strong>,就像我们熟知的Windows和macOS一样。它是计算机硬件（如CPU、内存、硬盘）和用户（或应用程序）之间的桥梁，负责管理所有硬件资源，并提供软件运行的环境。其在稳定性、安全性以及处理多并发方面都有独特优点。</p>
+<h2 id="Linux-目录结构">Linux 目录结构</h2>
+<ul>
+<li>
+<p><strong>/</strong> （根目录）<br>
+<strong>Linux目录</strong>采用的<strong>树状结构</strong>，所有目录都挂载在 <strong>/</strong> 根目录下，是所有目录以及文件的起点，是<strong>绝对路径</strong>的开始。<br>
+<em>（<strong>绝对路径</strong>：是指从文件系统的根目录开始并且到目标文件或者目录的路径；<strong>相对路径</strong>：指从当前所在目录开始到目标文件或者目录的路径）</em></p>
+</li>
+<li>
+<p><strong>/bin</strong> （binary 二进制目录）<br>
+<strong>/bin</strong>目录存放<strong>系统的可执行程序</strong>，所有用户均可执行。</p>
+</li>
+<li>
+<p><strong>/sbin</strong> （system binary 系统二进制目录）<br>
+<strong>/sbin</strong>目录存放系统管理的可执行程序，通常需要<strong>root</strong>权限执行。<br>
+<em>（<strong>root</strong>：是操作系统中权限最高的超级管理员用户）</em></p>
+</li>
+<li>
+<p><strong>/etc</strong> （editable text configuration 可编辑文本配置目录）<br>
+<strong>/etc</strong>目录存放这系统的配置文件。</p>
+</li>
+<li>
+<p><strong>/home</strong> （家目录）<br>
+<strong>/home</strong>目录为普通用户的主目录，每个普通用户都在 <strong>/home</strong> 下有一个与用户名相同的<strong>子目录</strong>。</p>
+</li>
+<li>
+<p><strong>/root</strong> （root用户的主目录）<br>
+<strong>/root</strong>目录为root用户（超级管理员）的主目录，仅<strong>root</strong>用户可以访问。</p>
+</li>
+<li>
+<p><strong>/usr</strong> （user system resources）<br>
+<strong>/usr</strong>目录为用户系统资源目录，一般存放系统软件资源。</p>
+</li>
+<li>
+<p><strong>/var</strong> （variable）<br>
+<strong>/var</strong>目录一般存放动态文件，如日志、缓存、临时文件等。</p>
+</li>
+<li>
+<p><strong>/tmp</strong> （temporary）<br>
+<strong>/tmp</strong>目录存放临时文件，所有用户均可读写，重启后文件可能会被清理。</p>
+</li>
+<li>
+<p><strong>/dev</strong> (device)<br>
+<strong>/dev</strong>目录存放设备文件，Linux系统的所有硬件设备（硬盘、键盘、打印机等）均以文件显示。<em>有一句话叫“Linux一切皆文件”</em></p>
+</li>
+<li>
+<p><strong>/proc</strong> （process）<br>
+<strong>/proc</strong>目录为虚拟文件系统，存放<strong>系统进程和内核信息</strong>，其中的文件内容是动态生成。</p>
+</li>
+<li>
+<p><strong>/sys</strong> （system）<br>
+<strong>/sys</strong>目录为虚拟文件系统，存放<strong>硬件设备和内核驱动的相关信息</strong>，一般用于管理硬件状态。</p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>学习笔记</tag>
+      </tags>
+  </entry>
+</search>
