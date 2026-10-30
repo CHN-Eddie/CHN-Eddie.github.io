@@ -86,7 +86,134 @@
 <p><strong>/sys</strong> （system）<br>
 <strong>/sys</strong>目录为虚拟文件系统，存放<strong>硬件设备和内核驱动的相关信息</strong>，一般用于管理硬件状态。</p>
 </li>
+<li>
+<p><strong>/boot</strong> （启动目录）<br>
+<strong>/boot</strong>目录存放<strong>系统启动相关文件</strong>，如内核文件（vmlinuz）、引导程序配置（grub）等。<em>一般不要手动改动，改坏了系统开不了机</em></p>
+</li>
+<li>
+<p><strong>/lib</strong> （library 库目录）<br>
+<strong>/lib</strong>目录存放系统启动和运行所需的<strong>共享库文件</strong>（相当于Windows里的 .dll 文件），<strong>/bin</strong> 和 <strong>/sbin</strong> 里的程序依赖它们。</p>
+</li>
+<li>
+<p><strong>/opt</strong> （optional 可选目录）<br>
+<strong>/opt</strong>目录一般用于安装<strong>第三方软件</strong>，很多手动安装（非包管理器）的软件会放在这里，比如 /opt/google/chrome。</p>
+</li>
+<li>
+<p><strong>/mnt</strong> （mount 挂载目录）<br>
+<strong>/mnt</strong>目录用于<strong>临时挂载</strong>其他文件系统，比如临时挂载一块U盘、一个网络共享。<em>手动挂载时常用</em></p>
+</li>
+<li>
+<p><strong>/media</strong> （媒体目录）<br>
+<strong>/media</strong>目录用于<strong>自动挂载</strong>可移动设备（U盘、移动硬盘、光盘），桌面版系统会自动在这里生成挂载点。</p>
+</li>
+<li>
+<p><strong>/srv</strong> （service 服务目录）<br>
+<strong>/srv</strong>目录存放<strong>服务类程序的数据</strong>，如网站文件、FTP 数据等。<em>现在很多发行版不再强制使用</em></p>
+</li>
+<li>
+<p><strong>/run</strong> （运行时目录）<br>
+<strong>/run</strong>目录存放系统<strong>本次运行期间</strong>的临时数据（进程PID、锁文件、socket），<strong>内存中</strong>，重启即清空。</p>
+</li>
+<li>
+<p><strong>/lost+found</strong> （找回目录）<br>
+<strong>/lost+found</strong>目录是文件系统损坏修复后，<strong>找回的碎片文件</strong>会被放在这里。<em>没有异常时可以忽略</em></p>
+</li>
 </ul>
+<h3 id="目录速查表">目录速查表</h3>
+<table>
+<thead>
+<tr>
+<th>目录</th>
+<th>作用</th>
+<th>记忆点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>/</strong></td>
+<td>根目录，一切路径的起点</td>
+<td>树根</td>
+</tr>
+<tr>
+<td><strong>/bin</strong></td>
+<td>普通用户可用的命令</td>
+<td>binary</td>
+</tr>
+<tr>
+<td><strong>/sbin</strong></td>
+<td>管理员用的命令</td>
+<td>system binary</td>
+</tr>
+<tr>
+<td><strong>/etc</strong></td>
+<td>配置文件</td>
+<td>改配置来这里</td>
+</tr>
+<tr>
+<td><strong>/home</strong></td>
+<td>普通用户的家</td>
+<td>你的文件都在这</td>
+</tr>
+<tr>
+<td><strong>/root</strong></td>
+<td>管理员的家</td>
+<td>只有root能进</td>
+</tr>
+<tr>
+<td><strong>/usr</strong></td>
+<td>系统软件资源</td>
+<td>装好的程序大多在这</td>
+</tr>
+<tr>
+<td><strong>/var</strong></td>
+<td>会变化的数据</td>
+<td>日志在看这里</td>
+</tr>
+<tr>
+<td><strong>/tmp</strong></td>
+<td>临时文件</td>
+<td>重启可能清空</td>
+</tr>
+<tr>
+<td><strong>/dev</strong></td>
+<td>设备文件</td>
+<td>一切皆文件</td>
+</tr>
+<tr>
+<td><strong>/proc</strong></td>
+<td>进程与内核信息</td>
+<td>虚拟的，不占硬盘</td>
+</tr>
+<tr>
+<td><strong>/sys</strong></td>
+<td>硬件与驱动信息</td>
+<td>虚拟的，调硬件</td>
+</tr>
+<tr>
+<td><strong>/boot</strong></td>
+<td>内核与引导</td>
+<td>别乱动</td>
+</tr>
+<tr>
+<td><strong>/lib</strong></td>
+<td>共享库</td>
+<td>程序运行依赖</td>
+</tr>
+<tr>
+<td><strong>/opt</strong></td>
+<td>第三方软件</td>
+<td>手动装的常在</td>
+</tr>
+<tr>
+<td><strong>/mnt</strong> / <strong>/media</strong></td>
+<td>挂载点</td>
+<td>插U盘看这里</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>一句话记住</strong>：<strong>配置</strong>去 <code>/etc</code>，<strong>日志</strong>去 <code>/var/log</code>，<strong>自己的东西</strong>放 <code>/home</code>，<strong>装好的软件</strong>在 <code>/usr</code>，<strong>临时用的</strong>放 <code>/tmp</code>。</p>
+</blockquote>
 ]]></content>
       <categories>
         <category>Linux</category>
