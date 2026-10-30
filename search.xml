@@ -239,7 +239,10 @@
 </tr>
 </tbody>
 </table>
-<h2 id="网络连接的三种方式（VMware）">网络连接的三种方式（VMware）</h2>
+<h2 id="虚拟机的三种网络模式（VMware）">虚拟机的三种网络模式（VMware）</h2>
+<blockquote>
+<p><strong>注意区分</strong>：这里讲的是「虚拟机怎么和外界网络连接」（桥接/NAT/仅主机），不是「宽带、WiFi、5G 怎么接入互联网」——那是另一回事。</p>
+</blockquote>
 <p>虚拟机装好后，第一件事是选网络模式。VMware 有三种，区别在<strong>IP 从哪来、谁能访问它</strong>：</p>
 <table>
 <thead>
