@@ -546,7 +546,7 @@
   </entry>
   <entry>
     <title>Python 学习笔记（持续更新中）</title>
-    <url>/2026/10/31/python_notes/</url>
+    <url>/2026/10/30/python_notes/</url>
     <content><![CDATA[<p>最近在系统性地补 Python 基础，边学边把能用的东西记下来。主要参考<a href="https://space.bilibili.com/37974444">黑马程序员</a>的入门课，但课程里一带而过、实际写代码又绕不过去的地方，我也一并写了进去。</p>
 <p>这份笔记按章节顺序往下写，前后有依赖，从头看比较顺。代码都是 Python 3，可以直接复制运行。</p>
 <h2 id="从一行-print-开始">从一行 print 开始</h2>
@@ -585,9 +585,97 @@
 <p><code>10 / 2</code> 得到的是 <code>5.0</code> 不是 <code>5</code>，这在需要整数的地方会出问题，要么用 <code>//</code>，要么再 <code>int()</code> 一次。</p>
 <p>比较和逻辑就常规：</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="number">3</span> &gt; <span class="number">2</span>           <span class="comment"># True</span></span><br><span class="line"><span class="number">3</span> == <span class="number">3.0</span>        <span class="comment"># True   值相等就算相等</span></span><br><span class="line"><span class="literal">True</span> <span class="keyword">and</span> <span class="literal">False</span>  <span class="comment"># False</span></span><br><span class="line"><span class="literal">True</span> <span class="keyword">or</span> <span class="literal">False</span>   <span class="comment"># True</span></span><br><span class="line"><span class="keyword">not</span> <span class="literal">True</span>        <span class="comment"># False</span></span><br></pre></td></tr></table></figure>
+<h2 id="条件判断">条件判断</h2>
+<p>程序要会&quot;看情况办事&quot;，靠的就是 <code>if</code>：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">age = <span class="number">18</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> age &gt;= <span class="number">18</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;成年&quot;</span>)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;未成年&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p>Python 用<strong>缩进</strong>表示&quot;这段属于 if&quot;。四个空格是约定，别用 Tab（混用会报 <code>TabError</code>）。</p>
+<p>判断多种情况用 <code>elif</code>，从上往下匹配，<strong>命中一个就跳出</strong>：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">score = <span class="number">85</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> score &gt;= <span class="number">90</span>:</span><br><span class="line">    grade = <span class="string">&quot;A&quot;</span></span><br><span class="line"><span class="keyword">elif</span> score &gt;= <span class="number">80</span>:</span><br><span class="line">    grade = <span class="string">&quot;B&quot;</span></span><br><span class="line"><span class="keyword">elif</span> score &gt;= <span class="number">60</span>:</span><br><span class="line">    grade = <span class="string">&quot;C&quot;</span></span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    grade = <span class="string">&quot;D&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(grade)      <span class="comment"># B</span></span><br></pre></td></tr></table></figure>
+<p>因为命中即跳出，所以 <code>elif</code> 里不用再写 <code>score &lt; 90</code>——顺序本身已经保证了。</p>
+<h3 id="判断条件怎么写">判断条件怎么写</h3>
+<table>
+<thead>
+<tr>
+<th>写法</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>a == b</code></td>
+<td>相等</td>
+</tr>
+<tr>
+<td><code>a != b</code></td>
+<td>不相等</td>
+</tr>
+<tr>
+<td><code>a &gt; b</code> / <code>a &lt;= b</code></td>
+<td>大小比较</td>
+</tr>
+<tr>
+<td><code>x in [1, 2, 3]</code></td>
+<td>在不在里面</td>
+</tr>
+<tr>
+<td><code>s and t</code> / <code>s or t</code> / <code>not s</code></td>
+<td>且 / 或 / 非</td>
+</tr>
+</tbody>
+</table>
+<p>新手最容易犯的错：<strong><code>=</code> 是赋值，<code>==</code> 才是比较</strong>。<code>if x = 1:</code> 直接语法报错，这点反而安全；危险的是 <code>if x == 1</code> 写成了 <code>if x = 1</code> 的那种思路混乱。</p>
+<p>还有一点值得早点知道：<strong>空值、0、空字符串、&quot;空&quot;的容器，在条件里都算假</strong>。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> []:        <span class="comment"># 空列表 → False</span></span><br><span class="line"><span class="keyword">if</span> <span class="string">&quot;0&quot;</span>:       <span class="comment"># 非空字符串 → True（注意！&quot;0&quot; 是真）</span></span><br><span class="line"><span class="keyword">if</span> <span class="number">0</span>:         <span class="comment"># 数字 0 → False</span></span><br><span class="line"><span class="keyword">if</span> <span class="literal">None</span>:      <span class="comment"># None → False</span></span><br></pre></td></tr></table></figure>
+<p>所以判断&quot;有没有拿到东西&quot;，直接 <code>if result:</code> 就够，不用写 <code>if result != None</code>。</p>
+<h3 id="嵌套与三元表达式">嵌套与三元表达式</h3>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 嵌套：先判断有没有票，再判断能不能进</span></span><br><span class="line">has_ticket = <span class="literal">True</span></span><br><span class="line"><span class="keyword">if</span> has_ticket:</span><br><span class="line">    <span class="keyword">if</span> age &gt;= <span class="number">18</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;可以入场&quot;</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;未成年不能入场&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p>简单的二选一可以用三元表达式压成一行：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">status = <span class="string">&quot;成年&quot;</span> <span class="keyword">if</span> age &gt;= <span class="number">18</span> <span class="keyword">else</span> <span class="string">&quot;未成年&quot;</span></span><br></pre></td></tr></table></figure>
+<p>超过一层嵌套就考虑拆开写，可读性比省行数重要。</p>
+<h2 id="循环">循环</h2>
+<h3 id="while：条件成立就一直转">while：条件成立就一直转</h3>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">count = <span class="number">0</span></span><br><span class="line"><span class="keyword">while</span> count &lt; <span class="number">5</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;第 <span class="subst">&#123;count + <span class="number">1</span>&#125;</span> 次&quot;</span>)</span><br><span class="line">    count += <span class="number">1</span>        <span class="comment"># 忘了这行就死循环</span></span><br></pre></td></tr></table></figure>
+<p><code>while</code> 的关键是<strong>一定要有让条件变化的语句</strong>，否则程序卡死。</p>
+<h3 id="for：遍历已知的序列">for：遍历已知的序列</h3>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">5</span>):        <span class="comment"># 0 1 2 3 4</span></span><br><span class="line">    <span class="built_in">print</span>(i)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> ch <span class="keyword">in</span> <span class="string">&quot;abc&quot;</span>:</span><br><span class="line">    <span class="built_in">print</span>(ch)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> name <span class="keyword">in</span> [<span class="string">&quot;张三&quot;</span>, <span class="string">&quot;李四&quot;</span>]:</span><br><span class="line">    <span class="built_in">print</span>(name)</span><br></pre></td></tr></table></figure>
+<p><code>range</code> 的三种写法：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">range</span>(<span class="number">5</span>)          <span class="comment"># 0,1,2,3,4</span></span><br><span class="line"><span class="built_in">range</span>(<span class="number">2</span>, <span class="number">6</span>)       <span class="comment"># 2,3,4,5</span></span><br><span class="line"><span class="built_in">range</span>(<span class="number">1</span>, <span class="number">10</span>, <span class="number">2</span>)   <span class="comment"># 1,3,5,7,9  第三个是步长</span></span><br></pre></td></tr></table></figure>
+<p><strong>什么时候用哪个</strong>：知道要遍历什么（列表、字符串、范围）用 <code>for</code>；只知道&quot;条件满足就一直做&quot;（比如等用户输入、等任务完成）用 <code>while</code>。</p>
+<h3 id="break-和-continue">break 和 continue</h3>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>):</span><br><span class="line">    <span class="keyword">if</span> i == <span class="number">3</span>:</span><br><span class="line">        <span class="keyword">continue</span>      <span class="comment"># 跳过本次，继续下一轮</span></span><br><span class="line">    <span class="keyword">if</span> i == <span class="number">7</span>:</span><br><span class="line">        <span class="keyword">break</span>         <span class="comment"># 整个循环结束</span></span><br><span class="line">    <span class="built_in">print</span>(i)          <span class="comment"># 0 1 2 4 5 6</span></span><br></pre></td></tr></table></figure>
+<p>这俩的区别值得用一句话钉死：<code>continue</code> 是&quot;这轮不算，下一个&quot;，<code>break</code> 是&quot;全都不算了，走出去&quot;。</p>
+<h3 id="循环嵌套">循环嵌套</h3>
+<p>外层转一圈，内层转满一整圈：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="number">4</span>):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="number">4</span>):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;<span class="subst">&#123;i&#125;</span>*<span class="subst">&#123;j&#125;</span>=<span class="subst">&#123;i*j&#125;</span>&quot;</span>, end=<span class="string">&quot;\t&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span>()      <span class="comment"># 内层结束换行</span></span><br></pre></td></tr></table></figure>
+<p>九九乘法表、打印图形基本都是这个套路。注意 <code>break</code> 只能跳出<strong>当前这一层</strong>。</p>
+<h2 id="函数">函数</h2>
+<p>代码写多了会发现同样的逻辑反复出现，函数就是把这些逻辑打包起来复用。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">greet</span>(<span class="params">name</span>):</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;你好，<span class="subst">&#123;name&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line">greet(<span class="string">&quot;张三&quot;</span>)</span><br><span class="line">greet(<span class="string">&quot;李四&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p><code>def</code> 定义，缩进的代码块是函数体，调用时写函数名加括号。</p>
+<h3 id="参数与返回值">参数与返回值</h3>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">add</span>(<span class="params">a, b</span>):</span><br><span class="line">    <span class="keyword">return</span> a + b</span><br><span class="line"></span><br><span class="line">result = add(<span class="number">3</span>, <span class="number">5</span>)</span><br><span class="line"><span class="built_in">print</span>(result)      <span class="comment"># 8</span></span><br></pre></td></tr></table></figure>
+<p><code>return</code> 把结果交回给调用方，<strong>同时结束函数</strong>——<code>return</code> 后面的代码不会执行。</p>
+<p>没有写 <code>return</code> 的函数，返回的是 <code>None</code>：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">log</span>(<span class="params">msg</span>):</span><br><span class="line">    <span class="built_in">print</span>(msg)</span><br><span class="line"></span><br><span class="line">x = log(<span class="string">&quot;hi&quot;</span>)     <span class="comment"># 打印 hi</span></span><br><span class="line"><span class="built_in">print</span>(x)          <span class="comment"># None</span></span><br></pre></td></tr></table></figure>
+<p><code>None</code> 是一个真实的空值类型，表示&quot;什么都没有&quot;，跟空字符串 <code>&quot;&quot;</code>、数字 <code>0</code> 都不是一回事。</p>
+<h3 id="默认参数">默认参数</h3>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">power</span>(<span class="params">base, exp=<span class="number">2</span></span>):</span><br><span class="line">    <span class="keyword">return</span> base ** exp</span><br><span class="line"></span><br><span class="line">power(<span class="number">3</span>)         <span class="comment"># 9     用默认值</span></span><br><span class="line">power(<span class="number">3</span>, <span class="number">3</span>)      <span class="comment"># 27    覆盖默认值</span></span><br></pre></td></tr></table></figure>
+<p>规则：<strong>带默认值的参数必须放在后面</strong>，<code>def f(a=1, b)</code> 是语法错误。</p>
+<h3 id="说明文档（docstring）">说明文档（docstring）</h3>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">add</span>(<span class="params">a, b</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    计算两个数的和</span></span><br><span class="line"><span class="string">    :param a: 第一个数</span></span><br><span class="line"><span class="string">    :param b: 第二个数</span></span><br><span class="line"><span class="string">    :return: 两数之和</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">return</span> a + b</span><br><span class="line"></span><br><span class="line"><span class="built_in">help</span>(add)        <span class="comment"># 能打印出这段说明</span></span><br></pre></td></tr></table></figure>
+<p>写在函数体第一行的三引号字符串就是 docstring，IDE 里鼠标悬停能看到，比 <code>#</code> 注释更&quot;正式&quot;。</p>
+<h3 id="作用域和-global">作用域和 global</h3>
+<p>函数里定义的变量是<strong>局部变量</strong>，出了函数就没了：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">f</span>():</span><br><span class="line">    x = <span class="number">10</span></span><br><span class="line"></span><br><span class="line">f()</span><br><span class="line"><span class="built_in">print</span>(x)      <span class="comment"># 报错：名字不存在</span></span><br></pre></td></tr></table></figure>
+<p>函数内部要改外面的全局变量，得声明 <code>global</code>：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">count = <span class="number">0</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">add_one</span>():</span><br><span class="line">    <span class="keyword">global</span> count</span><br><span class="line">    count += <span class="number">1</span></span><br><span class="line"></span><br><span class="line">add_one()</span><br><span class="line"><span class="built_in">print</span>(count)      <span class="comment"># 1</span></span><br></pre></td></tr></table></figure>
+<p><code>global</code> 能不用就不用 —— 到处改全局变量会让程序难维护，更常见的做法是<strong>把值作为返回值传出来</strong>。</p>
+<h3 id="综合案例：一个存取款机">综合案例：一个存取款机</h3>
+<p>把上面这些串起来，就是课后那个经典练习：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">balance = <span class="number">1000</span></span><br><span class="line">name = <span class="string">&quot;张三&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">show_menu</span>():</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;=&quot;</span> * <span class="number">30</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;  当前用户：<span class="subst">&#123;name&#125;</span>    余额：<span class="subst">&#123;balance&#125;</span>&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;  1. 查询余额&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;  2. 存款&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;  3. 取款&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;  4. 退出&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;=&quot;</span> * <span class="number">30</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">deposit</span>():</span><br><span class="line">    <span class="keyword">global</span> balance</span><br><span class="line">    amount = <span class="built_in">float</span>(<span class="built_in">input</span>(<span class="string">&quot;存入金额：&quot;</span>))</span><br><span class="line">    balance += amount</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;存款成功，当前余额 <span class="subst">&#123;balance&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">withdraw</span>():</span><br><span class="line">    <span class="keyword">global</span> balance</span><br><span class="line">    amount = <span class="built_in">float</span>(<span class="built_in">input</span>(<span class="string">&quot;取出金额：&quot;</span>))</span><br><span class="line">    <span class="keyword">if</span> amount &lt;= balance:</span><br><span class="line">        balance -= amount</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;取款成功，当前余额 <span class="subst">&#123;balance&#125;</span>&quot;</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;余额不足&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">main</span>():</span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        show_menu()</span><br><span class="line">        choice = <span class="built_in">input</span>(<span class="string">&quot;请选择：&quot;</span>)</span><br><span class="line">        <span class="keyword">if</span> choice == <span class="string">&quot;1&quot;</span>:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">f&quot;当前余额：<span class="subst">&#123;balance&#125;</span>&quot;</span>)</span><br><span class="line">        <span class="keyword">elif</span> choice == <span class="string">&quot;2&quot;</span>:</span><br><span class="line">            deposit()</span><br><span class="line">        <span class="keyword">elif</span> choice == <span class="string">&quot;3&quot;</span>:</span><br><span class="line">            withdraw()</span><br><span class="line">        <span class="keyword">elif</span> choice == <span class="string">&quot;4&quot;</span>:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&quot;再见&quot;</span>)</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&quot;输入有误，请重新选择&quot;</span>)</span><br><span class="line"></span><br><span class="line">main()</span><br></pre></td></tr></table></figure>
+<p>这段代码把变量、<code>if/elif</code>、<code>while</code>、函数、参数、返回值、<code>global</code> 全用上了。能独立写出来，基础部分就算过关了。</p>
 <h2 id="写到这儿">写到这儿</h2>
-<p>这一篇基本覆盖了变量、类型、输入输出和运算——能写出&quot;输入两个数算和&quot;这类小脚本了。再往下就是条件判断和循环，那是真正开始写&quot;程序&quot;的地方，等补完再更新上来。</p>
-<p>代码有问题或者哪里讲得不清楚，欢迎在评论区说。</p>
+<p>变量、类型、条件、循环、函数——日常写脚本的零件基本齐了。再往下是数据容器（列表、字典这些）和文件操作，整理好之后会补上来。</p>
 ]]></content>
       <categories>
         <category>Python</category>
