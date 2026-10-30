@@ -239,36 +239,59 @@
 </tr>
 </tbody>
 </table>
-<h2 id="网络连接的三种方式">网络连接的三种方式</h2>
+<h2 id="网络连接的三种方式（VMware）">网络连接的三种方式（VMware）</h2>
+<p>虚拟机装好后，第一件事是选网络模式。VMware 有三种，区别在<strong>IP 从哪来、谁能访问它</strong>：</p>
 <table>
 <thead>
 <tr>
 <th>模式</th>
-<th>说明</th>
-<th>特点</th>
+<th>虚拟网卡</th>
+<th>IP 从哪来</th>
+<th>能上网</th>
+<th>谁能访问虚拟机</th>
+<th>注意</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><strong>桥接</strong></td>
-<td>虚拟机和宿主机同网段，各一个独立 IP</td>
-<td>局域网能访问它</td>
+<td><strong>桥接</strong>（Bridged）</td>
+<td>VMnet0</td>
+<td><strong>路由器 DHCP</strong>，和宿主机同网段</td>
+<td>✅</td>
+<td>局域网里<strong>任何机器</strong></td>
+<td>需要网络有 DHCP；无线网卡有时不支持；IP 可能冲突</td>
 </tr>
 <tr>
 <td><strong>NAT</strong></td>
-<td>通过宿主机上网</td>
-<td>能上网，外部访问不进来</td>
+<td>VMnet8</td>
+<td><strong>VMware 自己的 DHCP</strong>（192.168.x.x 私有段）</td>
+<td>✅（经宿主机转发）</td>
+<td><strong>只有宿主机</strong>，外部要端口映射</td>
+<td>换 WiFi、换 IP 都不影响它，<strong>学习最省事</strong></td>
 </tr>
 <tr>
-<td><strong>仅主机</strong></td>
-<td>只和宿主机通信</td>
-<td>不能上网</td>
+<td><strong>仅主机</strong>（Host-only）</td>
+<td>VMnet1</td>
+<td>VMware 自己的 DHCP</td>
+<td>❌</td>
+<td><strong>只有宿主机</strong></td>
+<td>完全隔离，适合试危险软件</td>
 </tr>
 </tbody>
 </table>
 <blockquote>
-<p><strong>学习阶段选 NAT</strong> 最省事，不用管 IP 冲突。</p>
+<p>另外还有「自定义（VMnet2~VMnet19）」和「LAN 区段」，属于进阶用法，一般用不到。</p>
 </blockquote>
+<h2 id="怎么记">怎么记</h2>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">桥接   = 局域网里多了一台独立电脑（邻居能 ping 到它）</span><br><span class="line">NAT    = 躲在宿主机后面上网（能出去，外面进不来）</span><br><span class="line">仅主机 = 网线拔了，只能跟自己电脑说话</span><br></pre></td></tr></table></figure>
+<h2 id="学习阶段选哪个">学习阶段选哪个</h2>
+<p><strong>选 NAT。</strong> 理由：</p>
+<ul>
+<li>换网络（公司/家里/热点）不用改配置</li>
+<li>虚拟机 IP 固定在那个私有段里，SSH 连它不会变</li>
+<li>能上网装软件、<code>yum install</code> 都正常</li>
+</ul>
+<p><em>桥接适合&quot;要把虚拟机当局域网服务器给手机/其他电脑访问&quot;的场景</em></p>
 <h2 id="远程登录">远程登录</h2>
 <p>服务器不接显示器，都在机房/云上，要在自己电脑上远程操作。</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ssh 用户名@IP        <span class="comment"># 默认 22 端口</span></span><br><span class="line">ssh -p 2222 用户名@IP <span class="comment"># 指定端口</span></span><br><span class="line"><span class="built_in">exit</span>                 <span class="comment"># 退出</span></span><br></pre></td></tr></table></figure>
