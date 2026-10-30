@@ -304,8 +304,127 @@
 </ul>
 <p>常用工具：<strong>XShell</strong>（Windows）、<strong>MobaXterm</strong>、macOS 自带终端。</p>
 <h2 id="远程文件传输">远程文件传输</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">scp 本地文件 用户@IP:/远程路径   <span class="comment"># 本机 → 服务器</span></span><br><span class="line">scp 用户@IP:/远程文件 本地路径   <span class="comment"># 服务器 → 本机</span></span><br><span class="line">scp -r 本地目录 用户@IP:/远程路径 <span class="comment"># 传整个目录</span></span><br></pre></td></tr></table></figure>
-<p>图形化工具：<strong>XFTP</strong>（配 XShell）、<strong>FileZilla</strong>。都走 22 端口，不用额外开端口。</p>
+<p>传文件到服务器有两种命令行方式，<strong>都用 22 端口</strong>，都是加密的。</p>
+<h3 id="一、scp（一条命令拷完，最常用）">一、scp（一条命令拷完，最常用）</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 本地 → 远程</span></span><br><span class="line">scp 本地文件 user@IP:/远程路径/</span><br><span class="line">scp -r 本地目录 user@IP:/远程路径/     <span class="comment"># 传整个目录要加 -r</span></span><br><span class="line">scp -P 2222 文件 user@IP:/路径/        <span class="comment"># 非默认端口用大写 -P</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 远程 → 本地</span></span><br><span class="line">scp user@IP:/远程文件 /本地路径/</span><br></pre></td></tr></table></figure>
+<p><strong>特点</strong>：像 <code>cp</code> 一样，一条命令说完就完事。适合&quot;我就传一个文件&quot;。</p>
+<h3 id="二、sftp（交互式，像-FTP-一样浏览）">二、sftp（交互式，像 FTP 一样浏览）</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sftp user@IP          <span class="comment"># 进入 sftp 会话，提示符变成 sftp&gt;</span></span><br></pre></td></tr></table></figure>
+<p>进去以后常用命令：</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ls</code> / <code>cd</code> / <code>pwd</code></td>
+<td>查看、切换<strong>远程</strong>目录</td>
+</tr>
+<tr>
+<td><code>lls</code> / <code>lcd</code> / <code>lpwd</code></td>
+<td>查看、切换<strong>本地</strong>目录（l = local）</td>
+</tr>
+<tr>
+<td><code>put 文件</code></td>
+<td>上传</td>
+</tr>
+<tr>
+<td><code>get 文件</code></td>
+<td>下载</td>
+</tr>
+<tr>
+<td><code>put -r 目录</code> / <code>get -r 目录</code></td>
+<td>传目录</td>
+</tr>
+<tr>
+<td><code>reput</code> / <code>reget</code></td>
+<td>断点续传</td>
+</tr>
+<tr>
+<td><code>exit</code> 或 <code>bye</code></td>
+<td>退出</td>
+</tr>
+</tbody>
+</table>
+<p><strong>特点</strong>：可以先 <code>ls</code> 看看到底有哪些文件，再决定传什么。适合&quot;我不确定路径、想先浏览一下&quot;。</p>
+<h3 id="三、两者怎么选">三、两者怎么选</h3>
+<table>
+<thead>
+<tr>
+<th>对比</th>
+<th>scp</th>
+<th>sftp</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>用法</td>
+<td>一条命令</td>
+<td>交互会话</td>
+</tr>
+<tr>
+<td>浏览远程目录</td>
+<td>❌ 不行</td>
+<td>✅ 可以</td>
+</tr>
+<tr>
+<td>断点续传</td>
+<td>❌ 不支持</td>
+<td>✅ <code>reput</code> / <code>reget</code></td>
+</tr>
+<tr>
+<td>写脚本批量传</td>
+<td>✅ 方便</td>
+<td>✅ 也行</td>
+</tr>
+<tr>
+<td>传大文件断了</td>
+<td>得从头再来</td>
+<td>可以续传</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>实际经验</strong>：日常传一两个文件用 <code>scp</code>；传大文件（几百 MB 的备份）用 <code>sftp</code> + 续传，断了不用重来。</p>
+</blockquote>
+<h3 id="四、图形工具（不想敲命令）">四、图形工具（不想敲命令）</h3>
+<table>
+<thead>
+<tr>
+<th>工具</th>
+<th>平台</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>XFTP</strong></td>
+<td>Windows</td>
+<td>和 XShell 配套，左边本地右边远程，拖拽即可</td>
+</tr>
+<tr>
+<td><strong>FileZilla</strong></td>
+<td>Win/Mac/Linux</td>
+<td>免费开源，协议选 SFTP</td>
+</tr>
+<tr>
+<td><strong>Cyberduck</strong></td>
+<td>Mac</td>
+<td>Mac 上比较顺手</td>
+</tr>
+<tr>
+<td><strong>Termius</strong></td>
+<td>全平台</td>
+<td>带 SFTP 面板的 SSH 客户端</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>Mac 用户注意：<strong>Finder 里&quot;前往 → 连接服务器&quot;填 <code>sftp://user@IP</code></strong> 也能直接挂载成磁盘（但 Mac 自带只支持读取，写入要用第三方）。</p>
+</blockquote>
 <h2 id="vi-vim-快速入门">vi / vim 快速入门</h2>
 <p>改服务器配置文件基本都用它。记住三种模式就能上手：</p>
 <table>
