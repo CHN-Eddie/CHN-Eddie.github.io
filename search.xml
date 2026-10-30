@@ -34,31 +34,6 @@
 <h1>基础篇</h1>
 <h2 id="Linux-介绍">Linux 介绍</h2>
 <p><strong>Linux</strong>是一个开源、免费的<strong>操作系统</strong>,就像我们熟知的Windows和macOS一样。它是计算机硬件（如CPU、内存、硬盘）和用户（或应用程序）之间的桥梁，负责管理所有硬件资源，并提供软件运行的环境。其在稳定性、安全性以及处理多并发方面都有独特优点。</p>
-<h2 id="Linux-与-Unix-的关系">Linux 与 Unix 的关系</h2>
-<p><strong>Linux 是&quot;类 Unix&quot;系统</strong>：命令和设计思想跟 Unix 一脉相承，但代码是独立写的、<strong>开源免费</strong>。<em>所以学会 Linux，换到 Unix 也能用</em></p>
-<h2 id="为什么用-Linux-做服务器">为什么用 Linux 做服务器</h2>
-<table>
-<thead>
-<tr>
-<th>领域</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>服务器</strong></td>
-<td>企业网站、数据库、云服务大多跑 Linux</td>
-</tr>
-<tr>
-<td><strong>嵌入式</strong></td>
-<td>路由器、机顶盒、车载系统</td>
-</tr>
-<tr>
-<td><strong>移动端</strong></td>
-<td>Android 内核就是 Linux</td>
-</tr>
-</tbody>
-</table>
 <h2 id="Linux-目录结构">Linux 目录结构</h2>
 <ul>
 <li>
@@ -239,6 +214,31 @@
 <blockquote>
 <p><strong>一句话记住</strong>：<strong>配置</strong>去 <code>/etc</code>，<strong>日志</strong>去 <code>/var/log</code>，<strong>自己的东西</strong>放 <code>/home</code>，<strong>装好的软件</strong>在 <code>/usr</code>，<strong>临时用的</strong>放 <code>/tmp</code>。</p>
 </blockquote>
+<h2 id="Linux-与-Unix-的关系">Linux 与 Unix 的关系</h2>
+<p><strong>Linux 是&quot;类 Unix&quot;系统</strong>：命令和设计思想跟 Unix 一脉相承，但代码是独立写的、<strong>开源免费</strong>。<em>所以学会 Linux，换到 Unix 也能用</em></p>
+<h2 id="为什么用-Linux-做服务器">为什么用 Linux 做服务器</h2>
+<table>
+<thead>
+<tr>
+<th>领域</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>服务器</strong></td>
+<td>企业网站、数据库、云服务大多跑 Linux</td>
+</tr>
+<tr>
+<td><strong>嵌入式</strong></td>
+<td>路由器、机顶盒、车载系统</td>
+</tr>
+<tr>
+<td><strong>移动端</strong></td>
+<td>Android 内核就是 Linux</td>
+</tr>
+</tbody>
+</table>
 <h2 id="网络连接的三种方式">网络连接的三种方式</h2>
 <table>
 <thead>
