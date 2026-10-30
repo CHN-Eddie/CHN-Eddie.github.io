@@ -34,6 +34,31 @@
 <h1>基础篇</h1>
 <h2 id="Linux-介绍">Linux 介绍</h2>
 <p><strong>Linux</strong>是一个开源、免费的<strong>操作系统</strong>,就像我们熟知的Windows和macOS一样。它是计算机硬件（如CPU、内存、硬盘）和用户（或应用程序）之间的桥梁，负责管理所有硬件资源，并提供软件运行的环境。其在稳定性、安全性以及处理多并发方面都有独特优点。</p>
+<h2 id="Linux-与-Unix-的关系">Linux 与 Unix 的关系</h2>
+<p><strong>Linux 是&quot;类 Unix&quot;系统</strong>：命令和设计思想跟 Unix 一脉相承，但代码是独立写的、<strong>开源免费</strong>。<em>所以学会 Linux，换到 Unix 也能用</em></p>
+<h2 id="为什么用-Linux-做服务器">为什么用 Linux 做服务器</h2>
+<table>
+<thead>
+<tr>
+<th>领域</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>服务器</strong></td>
+<td>企业网站、数据库、云服务大多跑 Linux</td>
+</tr>
+<tr>
+<td><strong>嵌入式</strong></td>
+<td>路由器、机顶盒、车载系统</td>
+</tr>
+<tr>
+<td><strong>移动端</strong></td>
+<td>Android 内核就是 Linux</td>
+</tr>
+</tbody>
+</table>
 <h2 id="Linux-目录结构">Linux 目录结构</h2>
 <ul>
 <li>
@@ -213,6 +238,79 @@
 </table>
 <blockquote>
 <p><strong>一句话记住</strong>：<strong>配置</strong>去 <code>/etc</code>，<strong>日志</strong>去 <code>/var/log</code>，<strong>自己的东西</strong>放 <code>/home</code>，<strong>装好的软件</strong>在 <code>/usr</code>，<strong>临时用的</strong>放 <code>/tmp</code>。</p>
+</blockquote>
+<h2 id="网络连接的三种方式">网络连接的三种方式</h2>
+<table>
+<thead>
+<tr>
+<th>模式</th>
+<th>说明</th>
+<th>特点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>桥接</strong></td>
+<td>虚拟机和宿主机同网段，各一个独立 IP</td>
+<td>局域网能访问它</td>
+</tr>
+<tr>
+<td><strong>NAT</strong></td>
+<td>通过宿主机上网</td>
+<td>能上网，外部访问不进来</td>
+</tr>
+<tr>
+<td><strong>仅主机</strong></td>
+<td>只和宿主机通信</td>
+<td>不能上网</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>学习阶段选 NAT</strong> 最省事，不用管 IP 冲突。</p>
+</blockquote>
+<h2 id="远程登录">远程登录</h2>
+<p>服务器不接显示器，都在机房/云上，要在自己电脑上远程操作。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ssh 用户名@IP        <span class="comment"># 默认 22 端口</span></span><br><span class="line">ssh -p 2222 用户名@IP <span class="comment"># 指定端口</span></span><br><span class="line"><span class="built_in">exit</span>                 <span class="comment"># 退出</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>第一次连接输入 <code>yes</code> 接受指纹</li>
+<li><strong>输入密码时屏幕不显示任何字符</strong>，是正常的</li>
+</ul>
+<p>常用工具：<strong>XShell</strong>（Windows）、<strong>MobaXterm</strong>、macOS 自带终端。</p>
+<h2 id="远程文件传输">远程文件传输</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">scp 本地文件 用户@IP:/远程路径   <span class="comment"># 本机 → 服务器</span></span><br><span class="line">scp 用户@IP:/远程文件 本地路径   <span class="comment"># 服务器 → 本机</span></span><br><span class="line">scp -r 本地目录 用户@IP:/远程路径 <span class="comment"># 传整个目录</span></span><br></pre></td></tr></table></figure>
+<p>图形化工具：<strong>XFTP</strong>（配 XShell）、<strong>FileZilla</strong>。都走 22 端口，不用额外开端口。</p>
+<h2 id="vi-vim-快速入门">vi / vim 快速入门</h2>
+<p>改服务器配置文件基本都用它。<strong>记住三种模式</strong>就能上手：</p>
+<table>
+<thead>
+<tr>
+<th>模式</th>
+<th>怎么进</th>
+<th>干什么</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>命令模式</strong>（默认）</td>
+<td>打开就是</td>
+<td>移动、删除、复制</td>
+</tr>
+<tr>
+<td><strong>插入模式</strong></td>
+<td>按 <code>i</code></td>
+<td>打字</td>
+</tr>
+<tr>
+<td><strong>底行模式</strong></td>
+<td>按 <code>:</code></td>
+<td>保存、退出、查找</td>
+</tr>
+</tbody>
+</table>
+<p><strong>必会操作</strong>：<code>i</code> 开始编辑 → <code>Esc</code> 退出编辑 → <code>:wq</code> 保存退出；<code>dd</code> 删一行、<code>yy</code> 复制、<code>p</code> 粘贴、<code>u</code> 撤销、<code>/关键字</code> 搜索。</p>
+<blockquote>
+<p><strong>新手最常懵的点</strong>：打开文件直接打字没反应 —— 因为你在<strong>命令模式</strong>，要先按 <code>i</code>。</p>
 </blockquote>
 ]]></content>
       <categories>
