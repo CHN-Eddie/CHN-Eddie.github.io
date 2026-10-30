@@ -307,7 +307,7 @@
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">scp 本地文件 用户@IP:/远程路径   <span class="comment"># 本机 → 服务器</span></span><br><span class="line">scp 用户@IP:/远程文件 本地路径   <span class="comment"># 服务器 → 本机</span></span><br><span class="line">scp -r 本地目录 用户@IP:/远程路径 <span class="comment"># 传整个目录</span></span><br></pre></td></tr></table></figure>
 <p>图形化工具：<strong>XFTP</strong>（配 XShell）、<strong>FileZilla</strong>。都走 22 端口，不用额外开端口。</p>
 <h2 id="vi-vim-快速入门">vi / vim 快速入门</h2>
-<p>改服务器配置文件基本都用它。<strong>记住三种模式</strong>就能上手：</p>
+<p>改服务器配置文件基本都用它。记住三种模式就能上手：</p>
 <table>
 <thead>
 <tr>
@@ -334,9 +334,87 @@
 </tr>
 </tbody>
 </table>
-<p><strong>必会操作</strong>：<code>i</code> 开始编辑 → <code>Esc</code> 退出编辑 → <code>:wq</code> 保存退出；<code>dd</code> 删一行、<code>yy</code> 复制、<code>p</code> 粘贴、<code>u</code> 撤销、<code>/关键字</code> 搜索。</p>
+<h2 id="保存-退出：四种组合（重要）">保存 / 退出：四种组合（重要）</h2>
+<p>在<strong>命令模式</strong>下按 <code>:</code> 进入底行模式，然后：</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+<th>什么时候用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>:wq</code></td>
+<td><strong>保存并退出</strong></td>
+<td>改完要留</td>
+</tr>
+<tr>
+<td><code>:w</code></td>
+<td>保存，<strong>不退出</strong></td>
+<td>想接着改</td>
+</tr>
+<tr>
+<td><code>:q</code></td>
+<td>退出（<strong>没改动</strong>才行）</td>
+<td>只是看看，没动手</td>
+</tr>
+<tr>
+<td><strong><code>:q!</code></strong></td>
+<td><strong>不保存，强制退出</strong></td>
+<td>⭐ <strong>按错键、误删了、不想留改动</strong></td>
+</tr>
+</tbody>
+</table>
 <blockquote>
-<p><strong>新手最常懵的点</strong>：打开文件直接打字没反应 —— 因为你在<strong>命令模式</strong>，要先按 <code>i</code>。</p>
+<p>回车才生效（<code>:q!</code> 输完要按 Enter）。</p>
+</blockquote>
+<h2 id="按错了怎么办（新手必看）">按错了怎么办（新手必看）</h2>
+<p><strong>场景</strong>：想看看配置文件，手一滑按了 <code>x</code>（删掉一个字符），或者按了 <code>dd</code>（删一整行），屏幕都变了，慌了。</p>
+<p><strong>三步走</strong>：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1. 按 Esc        → 回到命令模式（回到&quot;安全状态&quot;）</span><br><span class="line">2. 输入 :q!      → 不保存，丢掉所有改动</span><br><span class="line">3. 按 Enter      → 退出，文件跟没打开过一样</span><br></pre></td></tr></table></figure>
+<p><strong>千万别按 <code>:wq</code></strong> —— 那会把误删的内容写进文件，配置文件一坏服务就起不来。</p>
+<h2 id="如果改动其实是想要的">如果改动其实是想要的</h2>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1. 按 Esc 回命令模式</span><br><span class="line">2. 输入 :wq + 回车</span><br></pre></td></tr></table></figure>
+<p>（<code>u</code> 是撤销上一步，改错了可以先按几下 <code>u</code> 回退，再决定 <code>:wq</code> 还是 <code>:q!</code>）</p>
+<h2 id="必会操作（命令模式下）">必会操作（命令模式下）</h2>
+<table>
+<thead>
+<tr>
+<th>按键</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>dd</code></td>
+<td>删一整行</td>
+</tr>
+<tr>
+<td><code>yy</code></td>
+<td>复制一整行</td>
+</tr>
+<tr>
+<td><code>p</code></td>
+<td>粘贴</td>
+</tr>
+<tr>
+<td><code>u</code></td>
+<td>撤销</td>
+</tr>
+<tr>
+<td><code>/关键字</code></td>
+<td>搜索，<code>n</code> 跳下一个</td>
+</tr>
+<tr>
+<td><code>gg</code> / <code>G</code></td>
+<td>跳到首行 / 末行</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>新手最常懵的点</strong>：打开文件直接打字没反应 —— 因为你在命令模式，要先按 <code>i</code>。</p>
 </blockquote>
 ]]></content>
       <categories>
